@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:5012";
-
 export default function ApiStatus() {
   const [status, setStatus] = useState("checking");
 
   useEffect(() => {
-    fetch(`${API_URL}/api/health`)
+    fetch(`/api/health`)
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
