@@ -1,0 +1,18 @@
+services:
+  api:
+    build: ./backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+  web:
+    build: ./frontend
+
+  proxy:
+    image: caddy:alpine
+    ports:
+      - "8000:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    depends_on:
+      - api
+      - web

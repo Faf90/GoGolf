@@ -1,5 +1,6 @@
 import { courses } from "./data/courses";
 import CourseCard from "./components/CourseCard";
+import ApiStatus from "./components/ApiStatus";
 
 export default function App() {
   return (
@@ -7,6 +8,7 @@ export default function App() {
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-6xl px-4 py-4">
           <h1 className="text-xl font-bold text-emerald-700">TeeTime</h1>
+          <ApiStatus />
         </div>
       </header>
 
