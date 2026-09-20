@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using GoGolf.Api.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 const string DevCorsPolicy = "DevCors";
@@ -14,6 +17,9 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod());
 });
 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+
 var app = builder.Build();
 
 app.UseCors(DevCorsPolicy);
@@ -24,5 +30,8 @@ app.MapGet("/api/health", () => new
     service = "GoGolf.Api",
     timestamp = DateTime.UtcNow
 });
+
+app.MapGet("/api/clubs", async (AppDbContext dbContext) =>
+    await dbContext.Clubs.ToListAsync());
 
 app.Run();
