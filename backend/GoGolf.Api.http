@@ -1,6 +1,17 @@
 @GoGolf.Api_HostAddress = http://localhost:5012
 
-GET {{GoGolf.Api_HostAddress}}/weatherforecast/
+### List all clubs
+GET {{GoGolf.Api_HostAddress}}/api/clubs
 Accept: application/json
 
-###
+### Get a single club
+GET {{GoGolf.Api_HostAddress}}/api/clubs/1
+Accept: application/json
+
+### Should return 404
+GET {{GoGolf.Api_HostAddress}}/api/clubs/9999
+Accept: application/json
+
+### Health check
+GET {{GoGolf.Api_HostAddress}}/api/health
+Accept: application/json

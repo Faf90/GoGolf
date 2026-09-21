@@ -2,6 +2,7 @@
 using GoGolf.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GoGolf.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260920152705_AddBays")]
+    partial class AddBays
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,78 +49,6 @@ namespace GoGolf.Api.Migrations
                         .IsUnique();
 
                     b.ToTable("Bays");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClubId = 1,
-                            IsActive = true,
-                            Name = "Bay 1"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClubId = 1,
-                            IsActive = true,
-                            Name = "Bay 2"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ClubId = 1,
-                            IsActive = true,
-                            Name = "Bay 3"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ClubId = 2,
-                            IsActive = true,
-                            Name = "Bay 1"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ClubId = 2,
-                            IsActive = true,
-                            Name = "Bay 2"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ClubId = 3,
-                            IsActive = true,
-                            Name = "Bay 1"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ClubId = 3,
-                            IsActive = true,
-                            Name = "Bay 2"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ClubId = 3,
-                            IsActive = true,
-                            Name = "Bay 3"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ClubId = 3,
-                            IsActive = true,
-                            Name = "Bay 4"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ClubId = 3,
-                            IsActive = true,
-                            Name = "Bay 5"
-                        });
                 });
 
             modelBuilder.Entity("GoGolf.Api.Models.Club", b =>
@@ -130,21 +61,17 @@ namespace GoGolf.Api.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("FromPrice")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("numeric(10,2)");
+                        .HasColumnType("numeric");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.Property<decimal>("Rating")
-                        .HasPrecision(2, 1)
-                        .HasColumnType("numeric(2,1)");
+                        .HasColumnType("numeric");
 
                     b.HasKey("Id");
 

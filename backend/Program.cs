@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using GoGolf.Api.Features.Clubs;
 using GoGolf.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,8 +32,7 @@ app.MapGet("/api/health", () => new
     timestamp = DateTime.UtcNow
 });
 
-app.MapGet("/api/clubs", async (AppDbContext dbContext) =>
-    await dbContext.Clubs.ToListAsync());
+app.MapClubEndpoints();
 
 using (var scope = app.Services.CreateScope())
 {
