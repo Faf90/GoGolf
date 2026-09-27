@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using GoGolf.Api.Features.Clubs;
 using GoGolf.Api.Data;
+using GoGolf.Api.Features.AvailableSlots;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
+builder.Services.AddSingleton(TimeProvider.System);
+
 var app = builder.Build();
 
 app.UseCors(DevCorsPolicy);
@@ -33,6 +36,7 @@ app.MapGet("/api/health", () => new
 });
 
 app.MapClubEndpoints();
+app.MapAvailableSlotsEndpoints();
 
 using (var scope = app.Services.CreateScope())
 {
