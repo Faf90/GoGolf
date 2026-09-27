@@ -24,6 +24,14 @@ public class ClubConfiguration : IEntityTypeConfiguration<Club>
         builder.Property(c => c.Rating)
             .HasPrecision(2, 1);
 
+        builder.Property(c => c.SlotDurationInMinutes)
+            .HasDefaultValue(60);
+    
+        builder.Property(c => c.TimeZoneId)
+            .IsRequired()
+            .HasMaxLength(64)
+            .HasDefaultValue("Africa/Johannesburg");
+
         builder.HasData(
             new Club { Id = 1, Name = "Shank", Address = "Moregloed, Pretoria", FromPrice = 150m, Rating = 5m },
             new Club { Id = 2, Name = "Simpact", Address = "Montana, Pretoria", FromPrice = 200m, Rating = 5m },

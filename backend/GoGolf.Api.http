@@ -15,3 +15,24 @@ Accept: application/json
 ### Health check
 GET {{GoGolf.Api_HostAddress}}/api/health
 Accept: application/json
+
+### Shank — Thursday, open 08:00–22:00, expect 14 slots
+GET {{GoGolf.Api_HostAddress}}/api/clubs/1/available-slots?date=2026-10-01
+
+### Simpact — Monday, closed, expect isOpen false
+GET {{GoGolf.Api_HostAddress}}/api/clubs/2/available-slots?date=2026-09-28
+
+### Golf Bar — Saturday, open
+GET {{GoGolf.Api_HostAddress}}/api/clubs/3/available-slots?date=2026-10-03
+
+### Golf Bar — Wednesday, closed
+GET {{GoGolf.Api_HostAddress}}/api/clubs/3/available-slots?date=2026-09-30
+
+### Today — only future slots should appear
+GET {{GoGolf.Api_HostAddress}}/api/clubs/1/available-slots?date=2026-09-21
+
+### Past date — expect 400
+GET {{GoGolf.Api_HostAddress}}/api/clubs/1/available-slots?date=2026-09-01
+
+### Garbage date — expect 400 from binding
+GET {{GoGolf.Api_HostAddress}}/api/clubs/1/available-slots?date=banana

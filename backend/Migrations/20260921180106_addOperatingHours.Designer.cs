@@ -3,6 +3,7 @@ using System;
 using GoGolf.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GoGolf.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260921180106_addOperatingHours")]
+    partial class addOperatingHours
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,14 +36,8 @@ namespace GoGolf.Api.Migrations
                     b.Property<int>("ClubId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
-
-                    b.Property<int>("MaxPlayers")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -60,7 +57,6 @@ namespace GoGolf.Api.Migrations
                             Id = 1,
                             ClubId = 1,
                             IsActive = true,
-                            MaxPlayers = 1,
                             Name = "Bay 1"
                         },
                         new
@@ -68,7 +64,6 @@ namespace GoGolf.Api.Migrations
                             Id = 2,
                             ClubId = 1,
                             IsActive = true,
-                            MaxPlayers = 1,
                             Name = "Bay 2"
                         },
                         new
@@ -76,7 +71,6 @@ namespace GoGolf.Api.Migrations
                             Id = 3,
                             ClubId = 1,
                             IsActive = true,
-                            MaxPlayers = 1,
                             Name = "Bay 3"
                         },
                         new
@@ -84,7 +78,6 @@ namespace GoGolf.Api.Migrations
                             Id = 4,
                             ClubId = 2,
                             IsActive = true,
-                            MaxPlayers = 1,
                             Name = "Bay 1"
                         },
                         new
@@ -92,7 +85,6 @@ namespace GoGolf.Api.Migrations
                             Id = 5,
                             ClubId = 2,
                             IsActive = true,
-                            MaxPlayers = 1,
                             Name = "Bay 2"
                         },
                         new
@@ -100,7 +92,6 @@ namespace GoGolf.Api.Migrations
                             Id = 6,
                             ClubId = 3,
                             IsActive = true,
-                            MaxPlayers = 1,
                             Name = "Bay 1"
                         },
                         new
@@ -108,7 +99,6 @@ namespace GoGolf.Api.Migrations
                             Id = 7,
                             ClubId = 3,
                             IsActive = true,
-                            MaxPlayers = 1,
                             Name = "Bay 2"
                         },
                         new
@@ -116,7 +106,6 @@ namespace GoGolf.Api.Migrations
                             Id = 8,
                             ClubId = 3,
                             IsActive = true,
-                            MaxPlayers = 1,
                             Name = "Bay 3"
                         },
                         new
@@ -124,7 +113,6 @@ namespace GoGolf.Api.Migrations
                             Id = 9,
                             ClubId = 3,
                             IsActive = true,
-                            MaxPlayers = 1,
                             Name = "Bay 4"
                         },
                         new
@@ -132,7 +120,6 @@ namespace GoGolf.Api.Migrations
                             Id = 10,
                             ClubId = 3,
                             IsActive = true,
-                            MaxPlayers = 1,
                             Name = "Bay 5"
                         });
                 });
@@ -365,121 +352,6 @@ namespace GoGolf.Api.Migrations
                         });
                 });
 
-            modelBuilder.Entity("GoGolf.Api.Models.PlayerRate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ClubId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("PlayerCount")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal>("Price")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("numeric(10,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClubId", "PlayerCount")
-                        .IsUnique();
-
-                    b.ToTable("PlayerRate", t =>
-                        {
-                            t.HasCheckConstraint("CK_PlayerRate_PlayerCountPositive", "\"PlayerCount\" >= 1");
-                        });
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClubId = 1,
-                            PlayerCount = 1,
-                            Price = 150m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ClubId = 1,
-                            PlayerCount = 2,
-                            Price = 200m
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ClubId = 1,
-                            PlayerCount = 3,
-                            Price = 250m
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ClubId = 1,
-                            PlayerCount = 4,
-                            Price = 300m
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ClubId = 2,
-                            PlayerCount = 1,
-                            Price = 150m
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ClubId = 2,
-                            PlayerCount = 2,
-                            Price = 200m
-                        },
-                        new
-                        {
-                            Id = 7,
-                            ClubId = 2,
-                            PlayerCount = 3,
-                            Price = 250m
-                        },
-                        new
-                        {
-                            Id = 8,
-                            ClubId = 2,
-                            PlayerCount = 4,
-                            Price = 300m
-                        },
-                        new
-                        {
-                            Id = 9,
-                            ClubId = 3,
-                            PlayerCount = 1,
-                            Price = 150m
-                        },
-                        new
-                        {
-                            Id = 10,
-                            ClubId = 3,
-                            PlayerCount = 2,
-                            Price = 200m
-                        },
-                        new
-                        {
-                            Id = 11,
-                            ClubId = 3,
-                            PlayerCount = 3,
-                            Price = 250m
-                        },
-                        new
-                        {
-                            Id = 12,
-                            ClubId = 3,
-                            PlayerCount = 4,
-                            Price = 300m
-                        });
-                });
-
             modelBuilder.Entity("GoGolf.Api.Models.Bay", b =>
                 {
                     b.HasOne("GoGolf.Api.Models.Club", "Club")
@@ -502,24 +374,11 @@ namespace GoGolf.Api.Migrations
                     b.Navigation("Club");
                 });
 
-            modelBuilder.Entity("GoGolf.Api.Models.PlayerRate", b =>
-                {
-                    b.HasOne("GoGolf.Api.Models.Club", "Club")
-                        .WithMany("PlayerRates")
-                        .HasForeignKey("ClubId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Club");
-                });
-
             modelBuilder.Entity("GoGolf.Api.Models.Club", b =>
                 {
                     b.Navigation("Bays");
 
                     b.Navigation("OperatingHours");
-
-                    b.Navigation("PlayerRates");
                 });
 #pragma warning restore 612, 618
         }
