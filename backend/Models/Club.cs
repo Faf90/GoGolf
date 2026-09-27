@@ -12,5 +12,6 @@ namespace GoGolf.Api.Models
         public string TimeZoneId { get; set; } = "Africa/Johannesburg";
         public ICollection<Bay> Bays { get; set; } = new List<Bay>();
         public ICollection<OperatingHours> OperatingHours { get; set; } = new List<OperatingHours>();
+        public ICollection<PlayerRate> PlayerRates { get; set; } = new List<PlayerRate>();
     }
 }

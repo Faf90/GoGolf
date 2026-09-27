@@ -1,4 +1,5 @@
 using System;
+using GoGolf.Api.Features.AvailableSlots;
 
 namespace GoGolf.Api.Features.Clubs;
 
@@ -16,12 +17,23 @@ public record ClubDetailDto(
     string Address, 
     decimal FromPrice, 
     decimal Rating,
-    IReadOnlyList<BayDto> Bays);
+    DateOnly BookableFrom,
+    DateOnly BookableUntil,
+    IReadOnlyList<OperatingHoursDto> OperatingHours,
+    IReadOnlyList<BayDto> Bays,
+    IReadOnlyList<PlayerRateDto> PlayerRates);
+
+public record OperatingHoursDto(
+    DayOfWeek DayOfWeek,
+    TimeOnly OpensAt,
+    TimeOnly ClosesAt);
 
 public record BayDto(
     int Id,
     string Name,
-    bool IsActive);
+    string? Description);
+
+public record PlayerRateDto(int PlayerCount, decimal Price);
 
 
 
