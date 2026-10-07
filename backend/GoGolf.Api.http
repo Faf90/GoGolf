@@ -17,7 +17,7 @@ GET {{GoGolf.Api_HostAddress}}/api/health
 Accept: application/json
 
 ### Shank — Thursday, open 08:00–22:00, expect 14 slots
-GET {{GoGolf.Api_HostAddress}}/api/clubs/1/available-slots?date=2026-10-01
+GET {{GoGolf.Api_HostAddress}}/api/clubs/1/available-slots?date=2026-09-27
 
 ### Simpact — Monday, closed, expect isOpen false
 GET {{GoGolf.Api_HostAddress}}/api/clubs/2/available-slots?date=2026-09-28
